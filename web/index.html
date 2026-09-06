@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cotizador de Seguros</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="encabezado">
+    <div class="encabezado-interior">
+      <div class="marca">
+        <span class="marca-texto">Venta de <span class="resaltado">seguros</span></span>
+      </div>
+      <nav class="tabs-nav" aria-label="Secciones">
+        <button type="button" class="tab-btn" data-panel="seguros">Seguros</button>
+        <button type="button" class="tab-btn activo" data-panel="cotizacion">Cotización</button>
+        <button type="button" class="tab-btn" data-panel="blog">Blog</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section id="panel-seguros" class="panel-tab panel-ancho">
+      <div class="hero hero-ancho">
+        <span class="etiqueta">Nuestros seguros</span>
+        <h1 class="panel-titulo">Encuentra el <span class="resaltado">seguro</span> ideal para ti</h1>
+        <p class="panel-subtitulo">
+          Estas son las categorías que evaluamos para recomendarte el mejor
+          plan. Ve a la pestaña Cotización para conversar con el asistente.
+        </p>
+      </div>
+
+      <div class="seguros-grid">
+        <article class="seguro-card">
+          <div class="seguro-interior">
+            <img class="seguro-imagen" src="img/vehicular.jpg" alt="Seguro Vehicular">
+            <div class="seguro-fade"></div>
+            <div class="seguro-texto">
+              <h3>Vehicular</h3>
+              <p>Protección para tu auto ante choques, robo y daños a terceros.</p>
+              <button type="button" class="btn-cotizar-card" data-panel="cotizacion">Cotizar</button>
+            </div>
+          </div>
+        </article>
+        <article class="seguro-card">
+          <div class="seguro-interior">
+            <img class="seguro-imagen" src="img/salud.jpg" alt="Seguro de Salud">
+            <div class="seguro-fade"></div>
+            <div class="seguro-texto">
+              <h3>Salud</h3>
+              <p>Atención médica y cobertura de gastos por enfermedad o accidente.</p>
+              <button type="button" class="btn-cotizar-card" data-panel="cotizacion">Cotizar</button>
+            </div>
+          </div>
+        </article>
+        <article class="seguro-card">
+          <div class="seguro-interior">
+            <img class="seguro-imagen" src="img/vida.jpg" alt="Seguro de Vida">
+            <div class="seguro-fade"></div>
+            <div class="seguro-texto">
+              <h3>Vida</h3>
+              <p>Respaldo económico para tu familia ante cualquier imprevisto.</p>
+              <button type="button" class="btn-cotizar-card" data-panel="cotizacion">Cotizar</button>
+            </div>
+          </div>
+        </article>
+        <article class="seguro-card">
+          <div class="seguro-interior">
+            <img class="seguro-imagen" src="img/viajes.jpg" alt="Seguro de Viajes">
+            <div class="seguro-fade"></div>
+            <div class="seguro-texto">
+              <h3>Viajes</h3>
+              <p>Cobertura médica y de equipaje mientras viajas dentro o fuera del país.</p>
+              <button type="button" class="btn-cotizar-card" data-panel="cotizacion">Cotizar</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="panel-cotizacion" class="panel-tab activo">
+      <div class="hero">
+        <span class="etiqueta">Asistente virtual</span>
+        <h1 class="panel-titulo">Cotiza tu <span class="resaltado">seguro</span> en minutos</h1>
+        <p class="panel-subtitulo">
+          Cuéntame tu situación (edad, si tienes auto y tus condiciones de
+          salud) y te recomiendo los seguros que se ajustan a ti.
+        </p>
+      </div>
+
+      <div class="panel-cotizador">
+        <div id="chat-mensajes" class="chat-mensajes" aria-live="polite"></div>
+
+        <div id="chat-cargando" class="chat-cargando" hidden>
+          <span></span><span></span><span></span>
+        </div>
+
+        <form id="chat-formulario" class="chat-formulario">
+          <input
+            id="chat-input"
+            type="text"
+            placeholder="Ejemplo: tengo 30 años, no tengo auto y no tengo condiciones de salud"
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="chat-boton">Enviar</button>
+        </form>
+
+        <p id="chat-error" class="chat-error" hidden>
+          Hubo un problema al conectar con el asistente. Intenta de nuevo.
+        </p>
+      </div>
+    </section>
+
+    <section id="panel-blog" class="panel-tab">
+      <div class="hero">
+        <span class="etiqueta">Blog</span>
+        <h1 class="panel-titulo">Contenido <span class="resaltado">en camino</span></h1>
+        <p class="panel-subtitulo">
+          Estamos preparando artículos sobre seguros y bienestar. Vuelve pronto.
+        </p>
+      </div>
+      <div class="placeholder-caja">
+        Próximamente
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <p>
+      Proyecto de práctica de Adrián Farfán, con estilo visual inspirado en
+      Rimac Seguros. No es un sitio oficial ni está afiliado a Rimac Seguros.
+    </p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
