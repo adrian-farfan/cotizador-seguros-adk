@@ -13,6 +13,9 @@ from google.genai import types
 
 from agent.agent import root_agent
 
+import logging
+logging.basicConfig(level=logging.INFO)
+
 app = FastAPI()
 
 session_service = InMemorySessionService()
@@ -53,13 +56,18 @@ async def cotizar(solicitud: SolicitudCotizacion):
     contenido = types.Content(role="user", parts=[types.Part(text=mensaje)])
 
     respuesta_final = ""
+    tokens_usados = 0
     async for evento in runner.run_async(
         user_id="usuario_api",
         session_id=session.id,
         new_message=contenido,
     ):
+        if evento.usage_metadata:
+            tokens_usados += evento.usage_metadata.total_token_count or 0
         if evento.is_final_response():
             respuesta_final = evento.content.parts[0].text
+
+    logging.info(f"[FinOps] /cotizar - sesion={session.id} - tokens_totales={tokens_usados}")
 
     return {"recomendacion": respuesta_final}
 
@@ -86,12 +94,17 @@ async def chat(payload: MensajeChat):
     contenido = types.Content(role="user", parts=[types.Part(text=payload.mensaje)])
 
     respuesta_final = ""
+    tokens_usados = 0
     async for evento in runner.run_async(
         user_id="usuario_web",
         session_id=session.id,
         new_message=contenido,
     ):
+        if evento.usage_metadata:
+            tokens_usados += evento.usage_metadata.total_token_count or 0
         if evento.is_final_response():
             respuesta_final = evento.content.parts[0].text
+
+    logging.info(f"[FinOps] /chat - sesion={session.id} - tokens_totales={tokens_usados}")
 
     return {"respuesta": respuesta_final}
