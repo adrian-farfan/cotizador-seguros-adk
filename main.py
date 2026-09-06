@@ -56,18 +56,20 @@ async def cotizar(solicitud: SolicitudCotizacion):
     contenido = types.Content(role="user", parts=[types.Part(text=mensaje)])
 
     respuesta_final = ""
-    tokens_usados = 0
+    tokens_entrada = 0
+    tokens_salida = 0
     async for evento in runner.run_async(
         user_id="usuario_api",
         session_id=session.id,
         new_message=contenido,
     ):
         if evento.usage_metadata:
-            tokens_usados += evento.usage_metadata.total_token_count or 0
+            tokens_entrada += evento.usage_metadata.prompt_token_count or 0
+            tokens_salida += evento.usage_metadata.candidates_token_count or 0
         if evento.is_final_response():
             respuesta_final = evento.content.parts[0].text
 
-    logging.info(f"[FinOps] /cotizar - sesion={session.id} - tokens_totales={tokens_usados}")
+    logging.info(f"[FinOps] /cotizar - sesion={session.id} - tokens_entrada={tokens_entrada} - tokens_salida={tokens_salida}")
 
     return {"recomendacion": respuesta_final}
 
@@ -105,6 +107,6 @@ async def chat(payload: MensajeChat):
         if evento.is_final_response():
             respuesta_final = evento.content.parts[0].text
 
-    logging.info(f"[FinOps] /chat - sesion={session.id} - tokens_totales={tokens_usados}")
-
+    logging.info(f"[FinOps] /chat - sesion={session.id} - tokens_entrada={tokens_entrada} - tokens_salida={tokens_salida}")
+    
     return {"respuesta": respuesta_final}
